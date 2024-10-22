@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';  // Tuodaan Router-komponentit
+
+// Tuodaan pääsivun, reseptisivun ja suosikkisivun komponentit
+import RecipeSearch from './RecipeSearch';  // Pääsivu, jossa käyttäjä voi hakea reseptejä
+import RecipeDetail from './RecipeDetail';  // Reseptinäkymä, jossa näytetään valitun reseptin yksityiskohdat
+import Favorites from './Favorites';        // Suosikit-näkymä, jossa käyttäjän tallentamat reseptit näkyvät
+import './css/RecipeSearch.css';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
+    // Router hallitsee sivunäkymien välisiä siirtymiä
+    <Router>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <nav>
+          {/* Navigointilinkit eri sivuille */}
+          <ul>
+            <li>
+              <Link to="/">Search</Link>  {/* Linkki pääsivulle */}
+            </li>
+            <li>
+              <Link to="/favorites">Favorites</Link>  {/* Linkki suosikkisivulle */}
+            </li>
+          </ul>
+        </nav>
+
+        {/* Switch-komponentti renderöi vain yhden reitin kerrallaan */}
+        <Switch>
+          {/* Reitti pääsivulle (reseptihaku) */}
+          <Route path="/" exact component={RecipeSearch} />
+          
+          {/* Reitti yksittäiselle reseptisivulle. ":id" viittaa dynaamiseen osaan reittiä, joka vastaanottaa reseptin ID:n */}
+          <Route path="/recipe/:id" component={RecipeDetail} />
+          
+          {/* Reitti suosikkisivulle, jossa näytetään käyttäjän suosikit */}
+          <Route path="/favorites" component={Favorites} />
+        </Switch>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
+
+
