@@ -5,7 +5,9 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import RecipeSearch from './RecipeSearch';  // Pääsivu, jossa käyttäjä voi hakea reseptejä
 import RecipeDetail from './RecipeDetail';  // Reseptinäkymä, jossa näytetään valitun reseptin yksityiskohdat
 import Favorites from './Favorites';        // Suosikit-näkymä, jossa käyttäjän tallentamat reseptit näkyvät
-import './css/RecipeSearch.css';
+import './RecipeSearch.css';
+
+
 
 
 function App() {

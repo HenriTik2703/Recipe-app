@@ -1,3 +1,5 @@
+/* RecipeSearch.css */
+
 /* Container-tyylit */
 .container {
     padding: 20px;
@@ -7,7 +9,7 @@
   /* Pääotsikko */
   h1 {
     font-size: 2em;
-    color: #4CAF50;
+    color: #4caf50;
   }
   
   /* Hakukenttä */
@@ -22,7 +24,7 @@
   .search-button {
     padding: 10px 15px;
     font-size: 1em;
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: white;
     border: none;
     border-radius: 5px;
@@ -55,4 +57,5 @@
   h3 {
     margin-top: 10px;
   }
+  
   
