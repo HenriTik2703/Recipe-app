@@ -1,0 +1,36 @@
+.favorites-container {
+    text-align: center; /* Keskitetään tekstisisältö */
+    padding: 20px; /* Lisätään tilaa ympärille */
+  }
+  
+  .favorites-container ul {
+    list-style-type: none; /* Poistetaan oletusarvoiset listatyylit */
+    padding: 0; /* Poistetaan ylimääräinen sisennys */
+  }
+  
+  .favorites-container li {
+    margin: 20px 0; /* Lisätään tilaa listan elementtien väliin */
+    display: flex; /* Asetetaan elementit vierekkäin */
+    align-items: center; /* Keskitetään elementit pystysuunnassa */
+    justify-content: space-between; /* Asetetaan kuva ja painike listan reunoille */
+  }
+  
+  .favorites-container img {
+    width: 100px; /* Asetetaan kuvien leveys */
+    height: auto; /* Säilytetään kuvasuhde */
+    margin-right: 20px; /* Lisätään tilaa kuvan ja tekstin väliin */
+  }
+  
+  .favorites-container button {
+    background-color: #f44336; /* Asetetaan taustaväriksi punainen */
+    color: white; /* Tekstin väri valkoinen */
+    border: none; /* Poistetaan reunaviivat */
+    padding: 10px 15px; /* Lisätään tilaa painikkeen sisällä */
+    cursor: pointer; /* Vaihdetaan osoitin käden kuvaksi */
+    border-radius: 5px; /* Pyöristetään painikkeen kulmat */
+  }
+  
+  .favorites-container button:hover {
+    background-color: #d32f2f; /* Tummennetaan taustaväriä, kun hiiri on painikkeen päällä */
+  }
+  

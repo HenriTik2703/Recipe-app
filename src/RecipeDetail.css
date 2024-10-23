@@ -1,0 +1,27 @@
+.recipe-detail {
+    text-align: center;
+  }
+  
+  .recipe-detail img {
+    width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .recipe-detail h2 {
+    margin-top: 20px;
+  }
+  
+  .recipe-detail ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .recipe-detail li {
+    margin: 5px 0;
+  }
+  
+  .recipe-detail p {
+    margin: 10px 0;
+  }
+  
