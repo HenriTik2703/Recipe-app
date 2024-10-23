@@ -1,59 +1,63 @@
-// RecipeSearch.jsx
 import React, { useState } from 'react';
-import axios from 'axios'; // Axios-kirjasto API-kutsuihin
-import './RecipeSearch.css'; // Tuodaan CSS-tiedosto, joka lisätään komponentin tyyleihin
+import axios from 'axios';
+import { Link } from 'react-router-dom'; // Tuodaan Link-komponentti navigointia varten
+import './RecipeSearch.css';
 
 const RecipeSearch = () => {
-  const [query, setQuery] = useState(''); // Käyttäjän hakukysely
-  const [recipes, setRecipes] = useState([]); // Hakutulokset, jotka haetaan API:sta
+  const [query, setQuery] = useState(''); // Käyttäjän hakutermi
+  const [recipes, setRecipes] = useState([]); // Tallennetaan haetut reseptit
 
-  // Funktio, joka hakee reseptejä Spoonacular API:sta käyttäen Axiosia
+  // Funktio, joka suorittaa API-kutsun hakemaan reseptejä käyttäjän syöttämällä hakusanalla
   const handleSearch = async () => {
     try {
-      // API-kutsu, jossa käytetään käyttäjän syöttämää hakukyselyä (query)
       const response = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${process.env.REACT_APP_API_KEY}`
+        `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=db372486753b4193b9ccc3e52fbf21ee`
       );
-      // Tallennetaan hakutulokset tilaan
-      setRecipes(response.data.results);
+      setRecipes(response.data.results); // Tallennetaan reseptit tilaan
     } catch (error) {
-      // Käsitellään mahdolliset virheet API-kutsussa
-      console.error('Error fetching recipes:', error);
+      console.error('Virhe reseptien hakemisessa:', error); // Näytetään virhe, jos API-kutsu epäonnistuu
     }
   };
 
   return (
     <div className="container">
-      {/* Pääotsikko */}
-      <h1>Recipe Search</h1>
+      <h1>Reseptihaku</h1>
 
-      {/* Hakukenttä */}
+      {/* Hakukenttä, johon käyttäjä voi syöttää hakusanan */}
       <input
         type="text"
-        value={query} // Kentän arvo sidottu query-tilaan
-        onChange={(e) => setQuery(e.target.value)} // Päivittää query-tilan käyttäjän syöttäessä tekstiä
-        placeholder="Search for recipes..." // Vihje käyttäjälle hakukentässä
+        value={query} // Hakukentän arvo
+        onChange={(e) => setQuery(e.target.value)} // Päivitetään hakusanaa
+        placeholder="Hae reseptejä..." // Näytetään vihje hakukentässä
         className="search-input"
       />
-      {/* Haku-painike */}
+
+      {/* Hae-painike */}
       <button onClick={handleSearch} className="search-button">
-        Search
+        Hae
       </button>
 
-      {/* Tulokset */}
+      {/* Näytetään hakutulokset, jos reseptejä on löytynyt */}
       {recipes.length > 0 && (
         <ul className="recipe-list">
-          {/* Käydään läpi jokainen resepti hakutuloksista ja näytetään ne luettelona */}
           {recipes.map((recipe) => (
             <li key={recipe.id} className="recipe-item">
-              <h3>{recipe.title}</h3> {/* Reseptin otsikko */}
-              <img src={recipe.image} alt={recipe.title} className="recipe-image" /> {/* Reseptin kuva */}
+              {/* Linkki yksittäisen reseptin sivulle */}
+              <Link to={`/recipe/${recipe.id}`}>
+                <h3>{recipe.title}</h3>
+                <img src={recipe.image} alt={recipe.title} className="recipe-image" />
+              </Link>
             </li>
           ))}
         </ul>
       )}
+
+      {/* Näytetään viesti, jos hakutuloksia ei ole */}
+      {recipes.length === 0 && <p>Hakutuloksia ei löytynyt.</p>}
     </div>
   );
 };
 
 export default RecipeSearch;
+
+

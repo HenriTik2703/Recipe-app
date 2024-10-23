@@ -1,61 +1,115 @@
-/* RecipeSearch.css */
+/* Taustatyylit */
+body {
+  background: linear-gradient(135deg, #74ebd5, #ACB6E5); /* Kaunis gradientti taustalle */
+  font-family: 'Roboto', sans-serif; /* Moderni fontti */
+}
 
 /* Container-tyylit */
 .container {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  /* Pääotsikko */
-  h1 {
-    font-size: 2em;
-    color: #4caf50;
-  }
-  
-  /* Hakukenttä */
-  .search-input {
-    padding: 10px;
-    width: 300px;
-    font-size: 1em;
-    margin-right: 10px;
-  }
-  
-  /* Haku-painike */
-  .search-button {
-    padding: 10px 15px;
-    font-size: 1em;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .search-button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Reseptien lista */
-  .recipe-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  /* Yksittäinen resepti */
-  .recipe-item {
-    margin: 20px 0;
-    text-align: left;
-  }
-  
-  /* Reseptin kuva */
-  .recipe-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  h3 {
-    margin-top: 10px;
-  }
-  
-  
+  padding: 40px; /* Suurempi padding */
+  max-width: 900px; /* Kapeampi leveys korttityyliin sopivaksi */
+  margin: 50px auto; /* Keskitetään sivu ja lisätään marginaalia ylhäältä */
+  background-color: rgba(255, 255, 255, 0.8); /* Läpikuultava valkoinen tausta */
+  border-radius: 20px; /* Pyöristetyt kulmat */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Syvempi varjoefekti */
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: scale(1.02); /* Pieni zoomi hoverilla */
+}
+
+/* Pääotsikko */
+h1 {
+  font-size: 3em;
+  color: #37474f; /* Tumma, elegantti väri */
+  letter-spacing: 2px; /* Tilaa kirjainten väliin */
+  font-weight: 700;
+  text-transform: uppercase; /* Isot kirjaimet */
+  margin-bottom: 40px;
+}
+
+/* Hakukenttä ja haku-painike */
+.input-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+/* Hakukenttä */
+.search-input {
+  padding: 15px;
+  width: 350px; /* Leveämpi kenttä */
+  font-size: 1.2em;
+  margin-right: 10px;
+  border: 2px solid #ddd;
+  border-radius: 30px; /* Pyöristetyt kulmat */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #74ebd5; /* Sopii taustan väreihin */
+  box-shadow: 0 4px 16px rgba(116, 235, 213, 0.5); /* Syvempi varjo fokusessa */
+}
+
+/* Haku-painike */
+.search-button {
+  padding: 15px 25px;
+  font-size: 1.2em;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05); /* Pieni zoomaus hoverilla */
+}
+
+/* Reseptien lista */
+.recipe-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 40px;
+}
+
+/* Yksittäinen resepti */
+.recipe-item {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-item:hover {
+  transform: translateY(-10px); /* Nosta korttia hoverilla */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Syvempi varjo hoverilla */
+}
+
+/* Reseptin kuva */
+.recipe-image {
+  max-width: 100px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Reseptin otsikko */
+h3 {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #37474f; /* Tumma otsikko */
+  transition: color 0.3s ease;
+}
+
+h3:hover {
+  color: #4caf50; /* Vihreä hoverilla */
+}

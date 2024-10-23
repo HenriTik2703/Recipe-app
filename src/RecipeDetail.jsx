@@ -1,50 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; 
-import axios from 'axios';
-import './RecipeDetail.css'; // Linkitetään tämän komponentin omaan CSS-tiedostoon
+import { useParams } from 'react-router-dom';  // Tuodaan useParams, jotta voidaan hakea ID URL:sta
+import axios from 'axios';  // Axios API-kutsuihin
+import './RecipeDetail.css';  // Tyylitiedosto komponentille
 
-// RecipeDetail-komponentti: näyttää yksityiskohtaisen reseptin tiedot.
 const RecipeDetail = () => {
-  const { id } = useParams(); // Haetaan URL:sta reseptin ID, joka tulee edellisen sivun linkistä.
-  const [recipe, setRecipe] = useState(null); // Alustetaan tila, johon tallennetaan reseptin tiedot (aluksi null).
+  const { id } = useParams(); // Hakee reseptin ID:n URL:sta, joka tulee linkistä (dynaaminen reitti /recipe/:id)
+  
+  const [recipe, setRecipe] = useState(null); // Tila, johon tallennetaan haettu resepti
+  const [favorites, setFavorites] = useState([]); // Tila, johon tallennetaan suosikkireseptit LocalStoragea varten
 
-  // Käytetään useEffect-koukkua, jotta API-kutsu suoritetaan heti kun komponentti ladataan.
   useEffect(() => {
-    // Funktio reseptin hakemista varten API:sta.
+    // Funktio reseptin tietojen hakemiseen API:sta
     const fetchRecipe = async () => {
       try {
-        // Haetaan yksittäisen reseptin tiedot Spoonacular API:sta reseptin ID:n perusteella.
-        const response = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=db372486753b4193b9ccc3e52fbf21ee`);
-        setRecipe(response.data); // Tallennetaan API:sta saatu data tilaan.
+        // Suoritetaan API-kutsu Spoonacular API:lle ja haetaan reseptin tiedot ID:n perusteella
+        const response = await axios.get(
+          `https://api.spoonacular.com/recipes/${id}/information?apiKey=db372486753b4193b9ccc3e52fbf21ee`
+        );
+        setRecipe(response.data);  // Tallennetaan haetut tiedot 'recipe'-tilaan
       } catch (error) {
-        console.error('Virhe haettaessa reseptiä', error); // Jos virhe tapahtuu, tulostetaan se konsoliin.
+        console.error('Virhe haettaessa reseptiä:', error);  // Jos API-kutsussa tapahtuu virhe, tulostetaan virhe konsoliin
       }
     };
-    fetchRecipe(); // Kutsutaan funktiota.
-  }, [id]); // id on riippuvuus; funktio suoritetaan aina, kun id muuttuu.
 
-  // Jos reseptiä ei ole vielä ladattu, näytetään "Ladataan..."-viesti.
+    fetchRecipe(); // Kutsutaan reseptin hakufunktiota heti kun komponentti ladataan
+
+    // Ladataan suosikit LocalStoragesta
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(storedFavorites); // Tallennetaan ladatut suosikit 'favorites'-tilaan
+  }, [id]);  // useEffect riippuu reseptin ID:stä. Se lataa uudet tiedot aina, kun ID vaihtuu
+
+  // Funktio, joka lisää nykyisen reseptin suosikkeihin ja tallentaa sen LocalStorageen
+  const addToFavorites = () => {
+    if (recipe) {  // Varmistetaan, että reseptin tiedot on haettu
+      const updatedFavorites = [...favorites, recipe];  // Päivitetään suosikit lisäämällä nykyinen resepti suosikkilistaan
+      setFavorites(updatedFavorites);  // Päivitetään tila suosikkien osalta
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));  // Tallennetaan päivitetty suosikkilista LocalStorageen JSON-muodossa
+    }
+  };
+
+  // Näytetään latausviesti, jos reseptin tietoja ei ole vielä haettu
   if (!recipe) {
     return <div>Ladataan reseptiä...</div>;
   }
 
-  // Jos resepti on ladattu, näytetään sen tiedot.
   return (
-    <div className="recipe-detail"> {/* Pääkontaineri reseptin yksityiskohdille */}
-      <h1>{recipe.title}</h1> {/* Reseptin otsikko */}
-      <img src={recipe.image} alt={recipe.title} /> {/* Reseptin kuva */}
+    <div className="recipe-detail">
+      {/* Näytetään reseptin otsikko */}
+      <h1>{recipe.title}</h1>
+
+      {/* Näytetään reseptin kuva */}
+      <img src={recipe.image} alt={recipe.title} />
+
+      {/* Näytetään raaka-aineet listana */}
       <h2>Raaka-aineet</h2>
       <ul>
-        {/* Listataan kaikki raaka-aineet */}
         {recipe.extendedIngredients.map((ingredient) => (
-          <li key={ingredient.id}>{ingredient.original}</li> // Jokaiselle raaka-aineelle oma listan elementti
+          <li key={ingredient.id}>{ingredient.original}</li>  // Näytetään jokainen raaka-aine listalla
         ))}
       </ul>
+
+      {/* Näytetään reseptin valmistusohjeet */}
       <h2>Valmistusohjeet</h2>
-      <p>{recipe.instructions}</p> {/* Näytetään valmistusohjeet */}
-      <h2>Ravitsemustiedot</h2>
-      {/* Esimerkkinä näytetään kalorit */}
-      <p>Kalorit: {recipe.nutrition?.nutrients?.find(nutrient => nutrient.name === 'Calories')?.amount}</p>
+      <p>{recipe.instructions}</p>
+
+      {/* "Lisää suosikkeihin" -painike */}
+      <button onClick={addToFavorites} className="btn btn-primary">
+        Lisää suosikkeihin
+      </button>
     </div>
   );
 };
