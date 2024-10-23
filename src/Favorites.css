@@ -1,36 +1,63 @@
+/* Favorites-sivun kontainerin tyylit */
 .favorites-container {
-    text-align: center; /* Keskitetään tekstisisältö */
-    padding: 20px; /* Lisätään tilaa ympärille */
-  }
-  
-  .favorites-container ul {
-    list-style-type: none; /* Poistetaan oletusarvoiset listatyylit */
-    padding: 0; /* Poistetaan ylimääräinen sisennys */
-  }
-  
-  .favorites-container li {
-    margin: 20px 0; /* Lisätään tilaa listan elementtien väliin */
-    display: flex; /* Asetetaan elementit vierekkäin */
-    align-items: center; /* Keskitetään elementit pystysuunnassa */
-    justify-content: space-between; /* Asetetaan kuva ja painike listan reunoille */
-  }
-  
-  .favorites-container img {
-    width: 100px; /* Asetetaan kuvien leveys */
-    height: auto; /* Säilytetään kuvasuhde */
-    margin-right: 20px; /* Lisätään tilaa kuvan ja tekstin väliin */
-  }
-  
-  .favorites-container button {
-    background-color: #f44336; /* Asetetaan taustaväriksi punainen */
-    color: white; /* Tekstin väri valkoinen */
-    border: none; /* Poistetaan reunaviivat */
-    padding: 10px 15px; /* Lisätään tilaa painikkeen sisällä */
-    cursor: pointer; /* Vaihdetaan osoitin käden kuvaksi */
-    border-radius: 5px; /* Pyöristetään painikkeen kulmat */
-  }
-  
-  .favorites-container button:hover {
-    background-color: #d32f2f; /* Tummennetaan taustaväriä, kun hiiri on painikkeen päällä */
-  }
-  
+  text-align: center; /* Keskitetään tekstisisältö */
+  padding: 40px; /* Lisätään tilaa ympärille */
+  background-color: #f7f7f7; /* Vaalea taustaväri */
+  border-radius: 10px; /* Pyöristetyt kulmat */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Pehmeä varjo */
+  max-width: 900px;
+  margin: 20px auto; /* Keskitetään kontaineri */
+}
+
+/* Listan tyylit */
+.favorites-container ul {
+  list-style-type: none; /* Poistetaan oletusarvoiset listatyylit */
+  padding: 0; /* Poistetaan ylimääräinen sisennys */
+  margin-top: 30px; /* Lisätään tilaa yläpuolelle */
+}
+
+/* Yksittäisen listan kohteen tyylit */
+.favorites-container li {
+  margin: 30px 0; /* Tilaa listan elementtien väliin */
+  display: flex; /* Elementit vierekkäin */
+  align-items: center; /* Keskitetään pystysuunnassa */
+  justify-content: space-between; /* Kuva ja teksti listan reunoille */
+  padding: 20px;
+  background-color: white; /* Valkoinen tausta jokaiselle reseptille */
+  border-radius: 10px; /* Pyöristetyt kulmat */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Pehmeä varjo */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover-efekti */
+}
+
+/* Hover-efekti jokaiselle reseptille */
+.favorites-container li:hover {
+  transform: translateY(-10px); /* Nosta korttia hoverilla */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Syvempi varjo hoverilla */
+}
+
+/* Reseptikuvan tyylit */
+.favorites-container img {
+  width: 120px; /* Suurempi kuvien leveys */
+  height: auto; /* Säilytetään kuvasuhde */
+  margin-right: 30px; /* Tilaa kuvan ja tekstin väliin */
+  border-radius: 10px; /* Pyöristetyt kuvan kulmat */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Kevyt varjo kuvan ympärille */
+}
+
+/* Painikkeen tyylit */
+.favorites-container button {
+  background-color: #f44336; /* Punainen taustaväri */
+  color: white; /* Valkoinen teksti */
+  border: none; /* Poistetaan reunaviivat */
+  padding: 12px 20px; /* Lisätään tilaa painikkeen sisällä */
+  cursor: pointer; /* Vaihdetaan osoitin käden kuvaksi */
+  border-radius: 5px; /* Pyöristetään painikkeen kulmat */
+  font-size: 1rem; /* Suurempi fonttikoko */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Pehmeä hover-efekti */
+}
+
+/* Hover-efekti painikkeelle */
+.favorites-container button:hover {
+  background-color: #d32f2f; /* Tummennetaan taustaväriä hover-tilassa */
+  transform: scale(1.05); /* Pieni zoomi hoverilla */
+}

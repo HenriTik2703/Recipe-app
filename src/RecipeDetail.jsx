@@ -3,9 +3,13 @@ import { useParams } from 'react-router-dom';  // Tuodaan useParams, jotta voida
 import axios from 'axios';  // Axios API-kutsuihin
 import './RecipeDetail.css';  // Tyylitiedosto komponentille
 
+import { useNavigate } from 'react-router-dom'; // Tuo useNavigate
+
+
 const RecipeDetail = () => {
-  const { id } = useParams(); // Hakee reseptin ID:n URL:sta, joka tulee linkistä (dynaaminen reitti /recipe/:id)
   
+  const navigate = useNavigate(); // Alustetaan navigate
+  const { id } = useParams(); // Hakee reseptin ID:n URL:sta, joka tulee linkistä (dynaaminen reitti /recipe/:id)
   const [recipe, setRecipe] = useState(null); // Tila, johon tallennetaan haettu resepti
   const [favorites, setFavorites] = useState([]); // Tila, johon tallennetaan suosikkireseptit LocalStoragea varten
 
@@ -36,6 +40,8 @@ const RecipeDetail = () => {
       const updatedFavorites = [...favorites, recipe];  // Päivitetään suosikit lisäämällä nykyinen resepti suosikkilistaan
       setFavorites(updatedFavorites);  // Päivitetään tila suosikkien osalta
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));  // Tallennetaan päivitetty suosikkilista LocalStorageen JSON-muodossa
+      
+    
     }
   };
 
@@ -61,13 +67,23 @@ const RecipeDetail = () => {
       </ul>
 
       {/* Näytetään reseptin valmistusohjeet */}
+      {/* Näytetään reseptin valmistusohjeet ilman ylimääräisiä <p> elementtejä */}
       <h2>Valmistusohjeet</h2>
-      <p>{recipe.instructions}</p>
+      <div dangerouslySetInnerHTML={{ __html: recipe.instructions }} /> {/* Tämä renderöi HTML:n suoraan */}
 
-      {/* "Lisää suosikkeihin" -painike */}
-      <button onClick={addToFavorites} className="btn btn-primary">
+
+      {/* Lisää suosikkeihin -painike */}
+      <button
+        onClick={() => {
+          addToFavorites(); // Kutsutaan funktiota, joka lisää reseptin suosikkeihin
+          navigate('/'); // Navigoidaan etusivulle lisäyksen jälkeen
+        }}
+        className="btn btn-primary"
+      > 
         Lisää suosikkeihin
       </button>
+
+
     </div>
   );
 };

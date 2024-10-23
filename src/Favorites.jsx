@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Favorites.css'; // Linkitetään komponentin omaan CSS-tiedostoon
 
+import { useNavigate } from 'react-router-dom'; // Tuo useNavigate
+
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]); // Tila suosikkiresepteille
 
@@ -28,7 +30,7 @@ const Favorites = () => {
       <ul>
         {favorites.map((recipe) => (
           <li key={recipe.id}>
-            <Link to={`/resepti/${recipe.id}`}>
+            <Link to={`/recipe/${recipe.id}`}>
               <img src={recipe.image} alt={recipe.title} /> {/* Näytetään reseptin kuva */}
               <h3>{recipe.title}</h3> {/* Näytetään reseptin nimi */}
             </Link>

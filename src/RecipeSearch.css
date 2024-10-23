@@ -1,6 +1,12 @@
 /* Taustatyylit */
-body {
-  background: linear-gradient(135deg, #74ebd5, #ACB6E5); /* Kaunis gradientti taustalle */
+body, html {
+  height: 100%; /* Varmistetaan, että koko sivu täyttää ruudun */
+  display: flex; /* Tehdään sivusta flexbox-layout */
+  justify-content: center; /* Keskitetään vaakasuunnassa */
+  align-items: center; /* Keskitetään pystysuunnassa */
+  margin: 0; /* Poistetaan oletusmarginaalit */
+  padding: 0; /* Poistetaan oletuspadding */
+  background: linear-gradient(135deg, #ffffff, #061970); /* Kaunis gradientti taustalle */
   font-family: 'Roboto', sans-serif; /* Moderni fontti */
 }
 
@@ -8,13 +14,14 @@ body {
 .container {
   padding: 40px; /* Suurempi padding */
   max-width: 900px; /* Kapeampi leveys korttityyliin sopivaksi */
-  margin: 50px auto; /* Keskitetään sivu ja lisätään marginaalia ylhäältä */
   background-color: rgba(255, 255, 255, 0.8); /* Läpikuultava valkoinen tausta */
   border-radius: 20px; /* Pyöristetyt kulmat */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Syvempi varjoefekti */
   text-align: center;
   transition: transform 0.3s ease;
+  margin: 0 auto; /* Keskitetään vaakasuunnassa */
 }
+
 
 .container:hover {
   transform: scale(1.02); /* Pieni zoomi hoverilla */
@@ -23,7 +30,7 @@ body {
 /* Pääotsikko */
 h1 {
   font-size: 3em;
-  color: #37474f; /* Tumma, elegantti väri */
+  color: #000000; /* Tumma, elegantti väri */
   letter-spacing: 2px; /* Tilaa kirjainten väliin */
   font-weight: 700;
   text-transform: uppercase; /* Isot kirjaimet */
